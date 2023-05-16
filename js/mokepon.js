@@ -7,18 +7,19 @@ function selectPlayerPet() {
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
     let inputRatigueya = document.getElementById('ratigueya')
-    let message = "You must select a pet"
+    let spamPlayerPet = document.getElementById('player-pet')
 
     if (inputHipodoge.checked) {
-        message = 'You selected Hipodoge'
+        spamPlayerPet.innerHTML = 'Hipodoge'
     }
     else if (inputCapipepo.checked) {
-        message = 'You selected Capipepo'
+        spamPlayerPet.innerHTML = 'Capipepo'
     }
     else if (inputRatigueya.checked) {
-        message = 'You selected Ratigueya'
+        spamPlayerPet.innerHTML = 'Ratigueya'
+    }else{
+        alert("You must select a pet")
     }
-    alert(message)
 }
 
 window.addEventListener('load', startGame)
