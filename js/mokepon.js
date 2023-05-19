@@ -1,9 +1,10 @@
 let playerAttack
+let enemyAttack
 
 function startGame() {
     let buttonSelectPlayerPet = document.getElementById('button-select-pet')
     buttonSelectPlayerPet.addEventListener('click', selectPlayerPet)
-
+    
     let fireButton = document.getElementById('button-fire')
     fireButton.addEventListener('click', fireAttack)
     let waterButton = document.getElementById('button-water')
@@ -49,14 +50,39 @@ function selectEnemyPet() {
 
 function fireAttack() {
     playerAttack = "FIRE 🔥"
+    selectEnemyAttack()
 }
 
 function waterAttack() {
     playerAttack = "WATER 💧"
+    selectEnemyAttack()
 }
 
 function earthAttack() {
     playerAttack = "EARTH 🌱"
+    selectEnemyAttack()
+}
+
+function selectEnemyAttack() {
+    let randomAttack = randomness(1, 3)
+    
+    if (randomAttack == 1) {
+        enemyAttack = "FIRE 🔥"
+    }
+    else if (randomAttack == 2) {
+        enemyAttack = "WATER 💧"
+    } else {
+        enemyAttack = "EARTH 🌱"
+    }
+    createMessage()
+}
+
+function createMessage() {
+    let messagesSection = document.getElementById("messages")
+    let paragraph = document.createElement('p')
+    paragraph.innerHTML = "Your pet attacked with " + playerAttack + " the enemy's pet attacked with " + enemyAttack + " - " + "Pendiente"
+    
+    messagesSection.appendChild(paragraph)
 }
 
 function randomness(min, max) {
