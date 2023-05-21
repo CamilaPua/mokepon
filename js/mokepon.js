@@ -74,13 +74,25 @@ function selectEnemyAttack() {
     } else {
         enemyAttack = "EARTH 🌱"
     }
-    createMessage()
+    combat()
 }
 
-function createMessage() {
+function combat(){
+    if (playerAttack == enemyAttack){
+        combatResult = "TIE 😐"
+    }
+    else if ((playerAttack == "FIRE 🔥" && enemyAttack == "EARTH 🌱") || (playerAttack == "WATER 💧" && enemyAttack == "FIRE 🔥") || (playerAttack == "EARTH 🌱" && enemyAttack == "WATER 💧")) {
+        combatResult = "YOU WIN 🥳"
+    } else {
+        combatResult = "YOU LOSE 😫"
+    }
+    createMessage(combatResult)
+}
+
+function createMessage(combatResult) {
     let messagesSection = document.getElementById("messages")
     let paragraph = document.createElement('p')
-    paragraph.innerHTML = "Your pet attacked with " + playerAttack + " the enemy's pet attacked with " + enemyAttack + " - " + "Pendiente"
+    paragraph.innerHTML = "Your pet attacked with " + playerAttack + " the enemy's pet attacked with " + enemyAttack + " - " + combatResult
     
     messagesSection.appendChild(paragraph)
 }
