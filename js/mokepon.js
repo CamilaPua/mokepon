@@ -1,6 +1,9 @@
 let playerAttack
 let enemyAttack
 
+let playerLives = 3
+let enemyLives = 3
+
 function startGame() {
     let buttonSelectPlayerPet = document.getElementById('button-select-pet')
     buttonSelectPlayerPet.addEventListener('click', selectPlayerPet)
@@ -78,15 +81,30 @@ function selectEnemyAttack() {
 }
 
 function combat(){
+    let spamPlayerLives = document.getElementById('player-lives')
+    let spamEnemyLives = document.getElementById('enemy-lives')
     if (playerAttack == enemyAttack){
         combatResult = "TIE 😐"
     }
     else if ((playerAttack == "FIRE 🔥" && enemyAttack == "EARTH 🌱") || (playerAttack == "WATER 💧" && enemyAttack == "FIRE 🔥") || (playerAttack == "EARTH 🌱" && enemyAttack == "WATER 💧")) {
         combatResult = "YOU WIN 🥳"
+        enemyLives --
+        spamEnemyLives.innerHTML = enemyLives
     } else {
         combatResult = "YOU LOSE 😫"
+        playerLives --
+        spamPlayerLives.innerHTML = playerLives
     }
     createMessage(combatResult)
+    checkLives()
+}
+
+function checkLives() {
+    if (enemyLives <= 0){
+        createFinalMessage("¡You won the game! 🥳")
+    } else if (playerLives <= 0){
+        createFinalMessage("¡Game over you lose! 😖")
+    }
 }
 
 function createMessage(combatResult) {
@@ -96,6 +114,15 @@ function createMessage(combatResult) {
     
     messagesSection.appendChild(paragraph)
 }
+
+function createFinalMessage(finalResult) {
+    let messagesSection = document.getElementById("messages")
+    let paragraph = document.createElement('p')
+    paragraph.innerHTML = finalResult
+    
+    messagesSection.appendChild(paragraph)
+}
+
 
 function randomness(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
