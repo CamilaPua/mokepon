@@ -14,6 +14,9 @@ function startGame() {
     waterButton.addEventListener('click', waterAttack)
     let earthButton = document.getElementById('button-earth')
     earthButton.addEventListener('click', earthAttack)
+    
+    let restartButton = document.getElementById('button-restart')
+    restartButton.addEventListener('click', restartGame)
 }
 
 function selectPlayerPet() {
@@ -121,8 +124,20 @@ function createFinalMessage(finalResult) {
     paragraph.innerHTML = finalResult
     
     messagesSection.appendChild(paragraph)
+
+
+    let fireButton = document.getElementById('button-fire')
+    fireButton.disabled = true
+    let waterButton = document.getElementById('button-water')
+    waterButton.disabled = true
+    let earthButton = document.getElementById('button-earth')
+    earthButton.disabled = true
+    
 }
 
+function restartGame() {
+    location.reload()
+}
 
 function randomness(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
